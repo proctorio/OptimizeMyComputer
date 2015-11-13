@@ -1,0 +1,154 @@
+﻿<Window x:Class="Optimize_My_Computer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:optimizeMyComputer="clr-namespace:Optimize_My_Computer"
+                Title="Please Optimize My Computer!" Height="373.333" Width="489.697" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen"
+        Loaded="OnWindowLoaded" WindowStyle="ToolWindow" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <optimizeMyComputer:ProgressToAngleConverter x:Key="ProgressConverter"/>
+        <Style TargetType="{x:Type ProgressBar}" x:Key="ProgressBarStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid>
+                            <optimizeMyComputer:Arc StrokeThickness="15" Stroke="#61616161" Margin="5">
+                                <optimizeMyComputer:Arc.StartAngle>
+                                    <MultiBinding Converter="{StaticResource ProgressConverter}">
+                                        <Binding Path="Minimum" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+                                    </MultiBinding>
+                                </optimizeMyComputer:Arc.StartAngle>
+                                <optimizeMyComputer:Arc.EndAngle>
+                                    <MultiBinding Converter="{StaticResource ProgressConverter}">
+                                        <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="." RelativeSource="{RelativeSource TemplatedParent}"/>
+                                    </MultiBinding>
+                                </optimizeMyComputer:Arc.EndAngle>
+                            </optimizeMyComputer:Arc>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Viewbox Grid.ColumnSpan="2">
+            <ProgressBar Style="{StaticResource ProgressBarStyle}" Name="P" Width="200" Height="200" 
+                         Value="0"/>
+        </Viewbox>
+        <Grid Grid.Row="0" Grid.Column="0" Name="BackgroundGrid" Width="256" Height="256" Visibility="Collapsed" Margin="114,44,93.667,44" />
+        <Grid Grid.Row="0" Grid.Column="0" Name="BackgroundGrid2" Width="256" Height="256" Visibility="Collapsed" Margin="114,44,93.667,44" />
+        <Path Grid.Row="0" Grid.Column="0" Name="CheckMark" Data="M465.398469957348,2.284039510414E-06C482.459535631177,-7.61341652832925E-07 499.520570787427,-7.61341652832925E-07 516.589754137036,2.284039510414E-06 519.715974840161,4.35931638350303 504.222078355786,9.83137658705527 495.651124986645,15.5573039399605 369.009920152661,100.241870437763 263.848604234692,210.585139785908 169.875505479809,318.99998048415 112.043924364087,266.893931900166 60.7961788501707,210.390620742939 0,160.277934585713 10.2915821399656,149.517451797627 23.4670200672117,140.696284805439 39.5505962696043,133.819682632588 67.6463871326414,148.99883607497 91.5659046497312,162.881587539814 125.526414903637,179.184352432392 130.292497667309,181.463908706806 162.467790636059,196.205531631611 165.214326890942,196.065074478291 171.321382555005,195.740977798603 187.712007555005,176.40232423415 197.793550523755,168.061854873798 270.811983140942,107.610042129658 375.722932847973,39.4010119782906 465.398469957348,2.284039510414E-06z" Stretch="Uniform" Fill="#FF02C52F" Width="256" Height="256" Margin="114,44,93.667,44" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <RotateTransform Angle="0" />
+                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <Grid Grid.Row="0" Grid.Column="0" Name="BackgroundGrid3" Width="256" Height="256" Visibility="Collapsed">
+            <Path Name="X" Data="M594.95,0L767,172.178 555.616,383.562 767,594.95 594.95,767 383.562,555.489 172.051,767 0,594.95 211.511,383.562 0.123904,172.178 172.178,0.123904 383.562,211.384z" Stretch="Uniform" Fill="#FFEF0000" Width="256" Height="256" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="0" Name="LaptopC" Width="250" Height="250" Visibility="Hidden">
+            <Path Data="M24.434,43.724003L26.166908,47.133002 37.516708,47.133002 39.566002,43.724003z M5.2005596,37.833L58.3256,37.833 64,49.34 0,49.34z M5.2010002,0L58.167,0 58.167,33.734001 54.540802,33.734001 54.540802,3.6249084 8.9834671,3.6249084 8.9834671,33.734001 5.2010002,33.734001z" Stretch="Uniform" Fill="#FF616161" Margin="39.198,22.285,20.18,37.093" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Grid.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+              Storyboard.TargetName="LaptopC"
+              Storyboard.TargetProperty="Opacity"
+              From="1.0" To="0.6" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="0" Name="DesktopC" Width="250" Height="250" Visibility="Hidden">
+            <Path Data="M6.8119836,14.353L14.522988,14.353 14.522988,16.363227 16.105982,16.363227 16.105982,17.858 5.2279826,17.858 5.2279826,16.363227 6.8119836,16.363227z M1.2659402,1.2657585L1.2659402,11.745341 20.066059,11.745341 20.066059,1.2657585z M0,0L21.333,0 21.333,13.010999 0,13.010999z" Stretch="Uniform" Fill="#FF616161" Width="196" Height="196" Margin="35.456,26.999,18.543,27" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Grid.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+              Storyboard.TargetName="DesktopC"
+              Storyboard.TargetProperty="Opacity"
+              From="1.0" To="0.6" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
+        <Path Grid.Row="0" Grid.Column="0" Name="Xx" Data="M594.95,0L767,172.178 555.616,383.562 767,594.95 594.95,767 383.562,555.489 172.051,767 0,594.95 211.511,383.562 0.123904,172.178 172.178,0.123904 383.562,211.384z" Stretch="Uniform" Fill="#FFEF0000" Width="256" Height="256" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <TransformGroup.Children>
+                        <RotateTransform Angle="0" />
+                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                    </TransformGroup.Children>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <Grid Grid.Row="0" Grid.Column="0" Name="Reboot" Width="256" Height="256" Visibility="Hidden">
+            <Path Data="M493.851,0C694.544,-3E-06 857.768,172.665 857.768,384.799 857.768,597.101 694.544,769.768 493.851,769.768 420.04,769.768 351.212,746.292 293.801,705.975L354.588,607.478C394.63,635.547 442.393,652.048 493.851,652.048 633.115,652.048 746.486,532.287 746.486,384.799 746.486,237.649 633.115,117.718 493.851,117.718 382.891,117.718 289.461,194.269 255.689,299.912L385.304,301.613 189.114,619.726 0,296.679 139.744,298.379C176.893,127.756,321.462,-3E-06,493.851,0z" Stretch="Uniform" Fill="#FF616161" Width="196" Height="196" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Grid.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+        Storyboard.TargetName="Reboot"
+        Storyboard.TargetProperty="Opacity"
+        From="1.0" To="0.6" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
+    </Grid>
+</Window>
