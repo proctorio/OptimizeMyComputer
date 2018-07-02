@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
 using Microsoft.Win32;
 
@@ -34,11 +33,9 @@ namespace Optimize_My_Computer
         public delegate void HideCheckCallback();
         public delegate void SetCursorCallback();
         public delegate void ShowXCallback();
-        public delegate void ShowDesktopCCallback();
         public delegate void ShowRebootCallback();
-        public delegate void ShowLaptopCCallback();
-        public delegate void HideDesktopCCallback();
-        public delegate void HideLaptopCCallback();
+        public delegate void ShowLogoCCallback();
+        public delegate void HideLogoCCallback();
         public delegate void HideRebootCallback();
 
         // are we ready for reboot?
@@ -51,16 +48,8 @@ namespace Optimize_My_Computer
             // hang tight
             P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("hang tight"));
 
-            // determine laptop vs desktop icon
-            // just check for battery... i know, if they remove the battery then this is a false value but whatever
-            if(SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery)
-            {
-                DesktopC.Dispatcher.Invoke(new ShowDesktopCCallback(ShowDesktopC));
-            }
-            else
-            {
-                LaptopC.Dispatcher.Invoke(new ShowDesktopCCallback(ShowLaptopC));
-            }
+            // show the proctorio logo
+            LogoC.Dispatcher.Invoke(new ShowLogoCCallback(ShowLogoC));
 
             // sleep a bit
             Thread.Sleep(500);
@@ -68,11 +57,11 @@ namespace Optimize_My_Computer
             // find me some microphones
             P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("finding startup items to fix..."));
 
-            // remove all startup items
-            // first pass, stage 1
-            // x86
             try
             {
+                // remove all startup items
+                // first pass, stage 1
+                // x86
                 P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), new object[] { 0 });
                 RegistryKey machinestartupKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 if (machinestartupKey != null)
@@ -82,7 +71,7 @@ namespace Optimize_My_Computer
                     for (int i = 0; i < itemsLength; i++)
                     {
                         // taking care of..
-                        P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (((double)itemsLength - (double)i) / (double)itemsLength)) * 100);
+                        P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (itemsLength - (double)i) / itemsLength) * 100);
                         P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("found: " + items[i].ToLower()));
 
                         // delete it, skip nod32
@@ -102,9 +91,11 @@ namespace Optimize_My_Computer
                 // ignored
             }
 
-            // x64
             try
             {
+                // remove all startup items
+                // first pass, stage 1
+                // x64
                 P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), new object[] { 0 });
                 RegistryKey machinestartupKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 if (machinestartupKey != null)
@@ -114,7 +105,7 @@ namespace Optimize_My_Computer
                     for (int i = 0; i < itemsLength; i++)
                     {
                         // taking care of..
-                        P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (((double)itemsLength - (double)i) / (double)itemsLength)) * 100);
+                        P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (itemsLength - (double)i) / itemsLength) * 100);
                         P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("found: " + items[i].ToLower()));
 
                         // delete it, skip nod32
@@ -134,10 +125,10 @@ namespace Optimize_My_Computer
                 // ignored
             }
 
-            // second pass, stage 1
-            // x86
             try
             {
+                // second pass, stage 1
+                // x86
                 P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), new object[] { 0 });
                 RegistryKey userstartupKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 if (userstartupKey != null)
@@ -147,7 +138,7 @@ namespace Optimize_My_Computer
                     for (int i = 0; i < itemsLength; i++)
                     {
                         // taking care of..
-                        P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (((double)itemsLength - (double)i) / (double)itemsLength)) * 100);
+                        P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (itemsLength - (double)i) / itemsLength) * 100);
                         P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("found: " + items[i].ToLower()));
 
                         // delete it
@@ -175,9 +166,10 @@ namespace Optimize_My_Computer
                 // ignored
             }
 
-            // x64
             try
             {
+                // second pass, stage 1
+                // x64
                 P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), new object[] { 0 });
                 RegistryKey userstartupKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 string[] items = userstartupKey.GetValueNames();
@@ -185,7 +177,7 @@ namespace Optimize_My_Computer
                 for (int i = 0; i < itemsLength; i++)
                 {
                     // taking care of..
-                    P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (((double)itemsLength - (double)i) / (double)itemsLength)) * 100);
+                    P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (itemsLength - (double)i) / itemsLength) * 100);
                     P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("found: " + items[i].ToLower()));
 
                     // delete it
@@ -209,9 +201,9 @@ namespace Optimize_My_Computer
                 // ignored
             }
 
-            // third pass, stage 2
             try
             {
+                // third pass, stage 2
                 P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), new object[] { 0 });
                 DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Startup));
                 FileInfo[] thefiles = di.GetFiles("*.lnk");
@@ -219,7 +211,7 @@ namespace Optimize_My_Computer
                 for (int i = 0; i < itemsLength; i++)
                 {
                     // taking care of..
-                    P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (((double)itemsLength - (double)i) / (double)itemsLength)) * 100);
+                    P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (itemsLength - (double)i) / itemsLength) * 100);
                     P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("found: " + Path.GetFileNameWithoutExtension(thefiles[i].Name)).ToLower());
 
                     // delete it
@@ -241,9 +233,9 @@ namespace Optimize_My_Computer
                 // ignored
             }
 
-            // fourth pass, stage 2
             try
             {
+                // fourth pass, stage 2
                 P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), new object[] { 0 });
                 DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Startup));
                 FileInfo[] thefiles = di.GetFiles("*.exe");
@@ -251,7 +243,7 @@ namespace Optimize_My_Computer
                 for (int i = 0; i < itemsLength; i++)
                 {
                     // taking care of..
-                    P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (((double)itemsLength - (double)i) / (double)itemsLength)) * 100);
+                    P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), (1.0 - (itemsLength - (double)i) / itemsLength) * 100);
                     P.Dispatcher.Invoke(new UpdateTitleCallback(UpdateTitle), ("found: " + Path.GetFileNameWithoutExtension(thefiles[i].Name)).ToLower());
 
                     // delete it
@@ -278,9 +270,9 @@ namespace Optimize_My_Computer
             P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), new object[] { 0 });
             Thread.Sleep(1500);
 
-            // set to high performance
             try
             {
+                // set to high performance
                 P.Dispatcher.Invoke(new UpdateProgressCallback(UpdateProgress), 33);
                 Guid max = new Guid("8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
                 PowerSetActiveScheme(IntPtr.Zero, ref max);
@@ -293,8 +285,7 @@ namespace Optimize_My_Computer
             }
 
             // hide the icon
-            DesktopC.Dispatcher.Invoke(new HideDesktopCCallback(HideDesktopC));
-            LaptopC.Dispatcher.Invoke(new HideLaptopCCallback(HideLaptopC));
+            LogoC.Dispatcher.Invoke(new HideLogoCCallback(HideLogoC));
 
             // show the checkmark
             CheckMark.Dispatcher.Invoke(new ShowCheckCallback(ShowCheck));
@@ -329,19 +320,13 @@ namespace Optimize_My_Computer
         private void ShowCheck() { CheckMark.Visibility = Visibility.Visible; }
 
         // show the laptop
-        private void ShowLaptopC() { LaptopC.Visibility = Visibility.Visible; }
-
-        // show the desktop
-        private void ShowDesktopC() { DesktopC.Visibility = Visibility.Visible; }
+        private void ShowLogoC() { LogoC.Visibility = Visibility.Visible; }
 
         // show the reboot
         private void ShowReboot() { Reboot.Visibility = Visibility.Visible; }
 
         // hide the laptop
-        private void HideLaptopC() { LaptopC.Visibility = Visibility.Hidden; }
-
-        // hide the desktop
-        private void HideDesktopC() { DesktopC.Visibility = Visibility.Hidden; }
+        private void HideLogoC() { LogoC.Visibility = Visibility.Hidden; }
 
         // title change for progress of events
         private void UpdateTitle(string m) { Title = m; }

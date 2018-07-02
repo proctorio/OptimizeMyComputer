@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:optimizeMyComputer="clr-namespace:Optimize_My_Computer"
-                Title="Please Optimize My Computer!" Height="373.333" Width="489.697" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen"
+                Title="Proctorio Optimize My Computer!" Height="373.333" Width="489.697" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen"
         Loaded="OnWindowLoaded" WindowStyle="ToolWindow" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
         <optimizeMyComputer:ProgressToAngleConverter x:Key="ProgressConverter"/>
@@ -68,8 +68,38 @@
                 </Path.RenderTransform>
             </Path>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="0" Name="LaptopC" Width="250" Height="250" Visibility="Hidden">
-            <Path Data="M24.434,43.724003L26.166908,47.133002 37.516708,47.133002 39.566002,43.724003z M5.2005596,37.833L58.3256,37.833 64,49.34 0,49.34z M5.2010002,0L58.167,0 58.167,33.734001 54.540802,33.734001 54.540802,3.6249084 8.9834671,3.6249084 8.9834671,33.734001 5.2010002,33.734001z" Stretch="Uniform" Fill="#FF616161" Margin="39.198,22.285,20.18,37.093" RenderTransformOrigin="0.5,0.5">
+        <Grid Grid.Row="0" Grid.Column="0" Name="LogoC" Width="250" Height="250" Visibility="Hidden">
+            <Path Data="F1 M160.55,169.1z M0,0z M118,28.18L76.75,28.18A14.39,14.39,0,0,0,62.38,42.55L62.38,73.35 67.23,73.35 67.23,42.55A9.53,9.53,0,0,1,76.75,33L118,33A9.53,9.53,0,0,1,127.52,42.52L127.52,95.6A9.53,9.53,0,0,1,118,105.12L99.88,105.12 99.88,110 118,110A14.39,14.39,0,0,0,132.37,95.6L132.37,42.55A14.39,14.39,0,0,0,118,28.18z" Stretch="Uniform" Fill="#d7df23" Margin="39.198,22.285,20.18,37.093" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Path Data="F1 M160.55,169.1z M0,0z M87.06,140.92L76.75,140.92A14.39,14.39,0,0,1,62.38,126.55L62.38,85.3A14.39,14.39,0,0,1,76.75,70.93L87.06,70.93A14.39,14.39,0,0,1,101.43,85.3L101.43,126.54A14.39,14.39,0,0,1,87.06,140.92z M76.75,75.78A9.53,9.53,0,0,0,67.23,85.3L67.23,126.54A9.53,9.53,0,0,0,76.75,136.06L87.06,136.06A9.53,9.53,0,0,0,96.58,126.54L96.58,85.3A9.53,9.53,0,0,0,87.06,75.78z" Stretch="Uniform" Fill="#8dc63f" Margin="39.198,22.285,20.18,37.093" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Path Data="F1 M160.55,169.1z M0,0z M81.9,100.84A10.39,10.39,0,1,1,92.29,90.45A10.4,10.4,0,0,1,81.9,100.84z M81.9,84.91A5.54,5.54,0,1,0,87.44,90.45A5.55,5.55,0,0,0,81.9,84.91z" Stretch="Uniform" Fill="#414042" Margin="39.198,22.285,20.18,37.093" RenderTransformOrigin="0.5,0.5">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <RotateTransform Angle="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Path Data="F1 M160.55,169.1z M0,0z M87.06,110L42.55,110A14.39,14.39,0,0,1,28.18,95.6L28.18,85.3A14.39,14.39,0,0,1,42.55,70.93L87.05,70.93A14.39,14.39,0,0,1,101.43,85.3L101.43,95.6A14.39,14.39,0,0,1,87.06,110z M42.56,75.8A9.53,9.53,0,0,0,33,85.3L33,95.6A9.53,9.53,0,0,0,42.52,105.12L87.02,105.12A9.53,9.53,0,0,0,96.54,95.6L96.54,85.3A9.53,9.53,0,0,0,87.02,75.78z" Stretch="Uniform" Fill="#414042" Margin="39.198,22.285,20.18,37.093" RenderTransformOrigin="0.5,0.5">
                 <Path.RenderTransform>
                     <TransformGroup>
                         <TransformGroup.Children>
@@ -84,31 +114,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-              Storyboard.TargetName="LaptopC"
-              Storyboard.TargetProperty="Opacity"
-              From="1.0" To="0.6" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Grid.Triggers>
-        </Grid>
-        <Grid Grid.Row="0" Grid.Column="0" Name="DesktopC" Width="250" Height="250" Visibility="Hidden">
-            <Path Data="M6.8119836,14.353L14.522988,14.353 14.522988,16.363227 16.105982,16.363227 16.105982,17.858 5.2279826,17.858 5.2279826,16.363227 6.8119836,16.363227z M1.2659402,1.2657585L1.2659402,11.745341 20.066059,11.745341 20.066059,1.2657585z M0,0L21.333,0 21.333,13.010999 0,13.010999z" Stretch="Uniform" Fill="#FF616161" Width="196" Height="196" Margin="35.456,26.999,18.543,27" RenderTransformOrigin="0.5,0.5">
-                <Path.RenderTransform>
-                    <TransformGroup>
-                        <TransformGroup.Children>
-                            <RotateTransform Angle="0" />
-                            <ScaleTransform ScaleX="1" ScaleY="1" />
-                        </TransformGroup.Children>
-                    </TransformGroup>
-                </Path.RenderTransform>
-            </Path>
-            <Grid.Triggers>
-                <EventTrigger RoutedEvent="Grid.Loaded">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-              Storyboard.TargetName="DesktopC"
+              Storyboard.TargetName="LogoC"
               Storyboard.TargetProperty="Opacity"
               From="1.0" To="0.6" Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
                         </Storyboard>
