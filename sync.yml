@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+    - main
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Plumbing/core-templates
+    - repository: OptimizeMyComputer
+      type: git
+      name: Open/OptimizeMyComputer
+
+stages:
+- template: stages/sync/azure-sync.yml@templates  # Template reference
+  parameters:
+    checkout: OptimizeMyComputer
